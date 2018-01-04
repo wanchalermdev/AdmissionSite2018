@@ -1,0 +1,23 @@
+@font-face {
+    font-family: myFont;
+    /* src: url("../fonts/sukhumvit/Sukhumvit-Thin.ttf"); */
+    /* src: url("../fonts/CSChatThai/CSChatThai.ttf"); */
+    /* src: url("../fonts/PraJad/CSPraJad.otf"); */
+    /* src: url("../fonts/PraJad/LayijiMahaniyom-Bao-1.2.ttf"); */
+    /* src: url("../fonts/PraJad/Circular.ttf"); */
+    /* src: url("../fonts/PraJad/supermarket.ttf"); */
+    src: url("../fonts/PraJad/THSarabun.ttf");
+}
+body{
+    font-family: myFont;
+    padding: 0px;
+    margin: 0px;
+    font-size: 1.25rem;
+}
+div{
+    font-family: myFont;
+    font-size: 1.255rem;
+    font-weight: lighter;
+}
+button{
+}

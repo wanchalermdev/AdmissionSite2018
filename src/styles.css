@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('./assets/css/bootstrap-grid.css');
+@import url('./assets/css/bootstrap-reboot.css');
+@import url('./assets/css/bootstrap.css');
+@import url('./assets/css/main_style.css');
+
+body{
+    
+}

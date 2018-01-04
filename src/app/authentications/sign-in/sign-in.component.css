@@ -1,4 +1,10 @@
-.example-full-width {
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
     width: 100%;
   }
   .login-row{
@@ -47,11 +53,17 @@
   margin: -65px 0 0 -65px;
   width: 130px;
   height: 130px;
-  background-image: url("../assets/images/NUD_Logo.png"); 
+  background-image: url("../../../assets/images/NUD_Logo.png"); 
   background-size: cover;
   background-repeat: no-repeat;
 } 
 
 .div-load{
   display: none;
+}
+#errorMessage{
+  color: red;
+}
+#successMessage{
+  color: green;
 }

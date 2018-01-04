@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <br />
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <mat-card>
+        <mat-card-title>
+          ลงชื่อเข้าใช้ระบบ
+        </mat-card-title>
+        <mat-card-subtitle>
+          กรุณากรอกชื่อผู้ใช้ และรหัสผ่านให้ถูกต้อง<br />
+          ชื่อผู้ใช้คือ เลขประจำตัวประชาชน<br />
+          รหัสผ่านคือ วันเดือนปีเกิด 8 หลัก (ววดดปปปป)
+          <label id="errorMessage">
+            {{ loginMessage }}
+          </label>
+          <label id="successMessage">
+            {{ loginSuccessMessage }}
+          </label>
+        </mat-card-subtitle>
+        <form [formGroup]="loginForm" (submit)="formLoginSubmit(loginForm.value)">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="ชื่อผู้ใช้" required formControlName="username">
+            <mat-error>กรุณากรอกชื่อผู้ใช้</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput type="password" required placeholder="รหัสผ่าน" formControlName="password">
+            <mat-error>กรุณาระบุรหัสผ่าน</mat-error>
+          </mat-form-field>
+          <div class="row justify-content-end">
+            <div class="col-4">
+              <button [disabled]="!loginForm.valid" mat-raised-button color="primary">เข้าสู่ระบบ</button>
+            </div>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="row">
+    <br />
+  </div>
+</div>

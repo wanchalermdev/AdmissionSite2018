@@ -1,0 +1,606 @@
+<br />
+<div class="container">
+
+  <mat-card>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="div-head-application">
+          <h1 id="application"><b>ใบสมัครออนไลน์</b></h1>
+          <h2><b>การรับสมัครสอบคัดเลือกนักเรียนเข้าศึกษาโรงเรียนมัธยมสาธิตมหาวิทยาลัยนเรศวร</b></h2>
+          <h2>ประจำปีการศึกษา {{ studentYear }} ระดับชั้นมัธยมศึกษาปีที่ {{ studentLevel }}</h2>
+          <b>เลขที่ใบสมัคร: </b>AF{{ student.year + student.level + student.plan_code + student.count }}
+        </div>
+      </div>
+      <div class="col-md-3 div-upload-image" style="text-align: center;">
+        <mat-card>
+          <div *ngIf="isUploadImage">
+            <img src="http://www.satit.nu.ac.th/AdmissionEngine/files/{{ student.year }}/images/{{ student.level }}/{{ student.image_name }}?param={{ rand }}"
+              width="100%" />
+            <a (click)="uploadStudentImage()">แก้ไขรูปภาพ</a>
+          </div>
+          <div *ngIf="!isUploadImage">
+
+            <button (click)="uploadStudentImage()" style="width: 130px; height: 130px;" mat-mini-fab>
+                    <mat-icon style="font-size: 5rem; margin-left: -55px;">wallpaper</mat-icon>
+                  </button>
+            <br />
+            <label style="font-size:1.2rem; margin-top: 0.4rem; color: red;">อัพโหลดรปูถ่ายหน้าตรงสวมชุดนักเรียน ถ่ายมาแล้วไม่เกิน 6 เดือน</label>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card>
+  <br />
+  <mat-card>
+    <div class="row">
+      <div class="topic-application">
+        เลือกหลักสูตร
+      </div>
+    </div>
+    <form [formGroup]="studentForm">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-select id="myPlan" formControlName="plan_code" [(ngModel)]="student.plan_code" placeholder="กรุณาเลือกแผนการเรียน">
+              <mat-option *ngFor="let course of couseM1" [value]="course.value">
+                {{ course.viewValue }}
+              </mat-option>
+              <mat-option *ngFor="let course of couseM4" [value]="course.value">
+                {{ course.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-error>กรุณาเลือกแผน</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+  <br />
+  <mat-card>
+    <form [formGroup]="studentForm">
+      <div class="row">
+        <div class="topic-application">
+          ส่วนที่ 1 ข้อมูลนักเรียน
+        </div>
+      </div>
+      <div class="sub-topic-application">
+        1.1 ข้อมูลส่วนตัว
+      </div>
+      <div class="row">
+        <div class="col-md-6 ">
+          <mat-form-field>
+            <input formControlName="personal_id" [(ngModel)]="student.personal_id" id="myFirstName" class="input-form-component" readonly="true"
+              matInput placeholder="เลขประจำตัวประชาชน-หากต้องการแก้ไขโปรดติดต่อเจ้าหน้าที่" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+          <mat-form-field>
+            <mat-select formControlName="birthday" [(ngModel)]="student.birthday" required placeholder="วันที่เกิด">
+              <mat-option *ngFor="let date of numOfDate" [value]="date.value">
+                {{ date.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-error>กรุณาระบุวันที่คุณเกิด</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+          <mat-form-field>
+            <mat-select formControlName="birthmonth" [(ngModel)]="student.birthmonth" required placeholder="เดือนที่เกิด">
+              <mat-option *ngFor="let mount of numOfMounts" [value]="mount.value">
+                {{ mount.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-error>กรุณาระบุเดือนที่คุณเกิด</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+          <mat-form-field>
+            <mat-select formControlName="birthyear" [(ngModel)]="student.birthyear" required placeholder="ปีที่เกิด">
+              <mat-option *ngFor="let year of numOfYears" [value]="year.value">
+                {{ year.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-error>กรุณาระบุปีที่คุณเกิด (พ.ศ.)</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          <mat-form-field>
+            <mat-select formControlName="prename_th" [(ngModel)]="student.prename_th" placeholder="คำหน้านาม">
+              <mat-option *ngFor="let preNmae of preNmaes" [value]="preNmae.value">
+                {{ preNmae.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field>
+            <input formControlName="firstname_th" [(ngModel)]="student.firstname_th" matInput placeholder="ชื่อ" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field>
+            <input formControlName="lastname_th" [(ngModel)]="student.lastname_th" matInput placeholder="นามสกุล" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field>
+            <input formControlName="firstname_en" [(ngModel)]="student.firstname_en" matInput placeholder="ชื่อ (ภาษาอังกฤษ)" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field>
+            <input formControlName="lastname_en" [(ngModel)]="student.lastname_en" matInput placeholder="นามสกุล (ภาษาอังกฤษ)" />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.ethnicity" matInput [matAutocomplete]="auto2" placeholder="เชื้อชาติ" />
+        </mat-form-field>
+
+        <mat-autocomplete #auto2="matAutocomplete">
+          <mat-option value="ไทย">ไทย</mat-option>
+          <!-- <mat-option *ngFor="let option of options" [value]="option">
+             {{ option }}
+          </mat-option> -->
+        </mat-autocomplete>
+
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.nationality" [matAutocomplete]="auto2" matInput placeholder="สัญชาติ" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.religion" [matAutocomplete]="auto3" matInput placeholder="ศาสนา" />
+        </mat-form-field>
+
+        <mat-autocomplete #auto3="matAutocomplete">
+          <mat-option value="พุทธ">พุทธ</mat-option>
+          <mat-option value="คริสต์">คริสต์</mat-option>
+          <mat-option value="อิสลาม">อิสลาม</mat-option>
+          <!-- <mat-option *ngFor="let option of options" [value]="option">
+               {{ option }}
+            </mat-option> -->
+        </mat-autocomplete>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.phone_number" matInput placeholder="หมายเลขโทรศัพท์" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.email" matInput placeholder="e-mail" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="sub-topic-application">
+      1.2 ที่อยู่ตามทะเบียนบ้าน
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address1_a" matInput placeholder="บ้านเลขที่" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address1_b" matInput placeholder="หมู่ที่" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address1_c" matInput placeholder="ชื่อหมู่บ้าน" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address1_d" matInput placeholder="ซอย" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address1_e" matInput placeholder="ถนน" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address1_f" matInput placeholder="แขวง/ตำบล" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address1_g" matInput placeholder="เขต/อำเภอ" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address1_h" [matAutocomplete]="auto4" [formControl]="myControl" matInput placeholder="จังหวัด" />
+        </mat-form-field>
+        <mat-autocomplete #auto4="matAutocomplete">
+          <mat-option *ngFor="let prv of filteredOptions4 | async" [value]="prv">
+            {{ prv }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address1_i" matInput placeholder="รหัสไปรษณีย์" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="sub-topic-application">
+      1.3 ที่อยู่ที่ติดต่อได้สะดวก
+      <button mat-raised-button (click)="copyAddress()" style="font-family: myFont; padding-top: 0.2rem; padding-bottom: 0.2rem; font-size: 1.25rem;"
+        id="btn-submit2" color="primary">คัดลอกที่อยู่ตามทะเบียนบ้าน</button>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address2_a" matInput placeholder="บ้านเลขที่" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address2_b" matInput placeholder="หมู่ที่" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address2_c" matInput placeholder="ชื่อหมู่บ้าน" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address2_d" matInput placeholder="ซอย" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address2_e" matInput placeholder="ถนน" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address2_f" matInput placeholder="แขวง/ตำบล" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address2_g" matInput placeholder="เขต/อำเภอ" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address2_h" [matAutocomplete]="auto4" [formControl]="myControl" matInput placeholder="จังหวัด" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.address2_i" matInput placeholder="รหัสไปรษณีย์" />
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card>
+  <br />
+  <mat-card>
+    <div class="row">
+      <div class="topic-application">
+        ส่วนที่ 2 ข้อมูลบิดา มารดา และผู้ปกครอง
+      </div>
+    </div>
+    <div class="row">
+      <div class="sub-topic-application">
+        2.1 ข้อมูลบิดา
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <mat-form-field>
+          <input [(ngModel)]="student.father_prename" matInput placeholder="คำหน้านาม-บิดา" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.father_firstname" matInput placeholder="ชื่อ-บิดา" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.father_lastname" matInput placeholder="นามสกุล-บิดา" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <!-- <mat-form-field>
+          <input [(ngModel)]="student.father_career" matInput placeholder="อาชีพ-บิดา" />
+        </mat-form-field> -->
+        <mat-form-field>
+          <mat-select [(ngModel)]="student.father_career" required placeholder="อาชีพ-บิดา">
+            <mat-option *ngFor="let year of career" [value]="year.value">
+              {{ year.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>กรุณาระบุอาชีพบิดา</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <!-- <mat-form-field>
+          <input [(ngModel)]="student.father_income" matInput placeholder="รายได้ต่อปีโดยประมาณ-บิดา" />
+        </mat-form-field> -->
+        <mat-form-field>
+          <mat-select [(ngModel)]="student.father_income" required placeholder="รายได้-บิดา">
+            <mat-option *ngFor="let year of income" [value]="year.value">
+              {{ year.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>กรุณาระบุรายได้บิดา</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.father_age" matInput placeholder="อายุ-บิดา" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.father_phone" matInput placeholder="หมายเลขโทรศัพท์-บิดา" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="sub-topic-application">
+        2.2 ข้อมูลมารดา
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <mat-form-field>
+          <input [(ngModel)]="student.mother_prename" matInput placeholder="คำหน้านาม-มารดา" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.mother_firstname" matInput placeholder="ชื่อ-มารดา" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.mother_lastname" matInput placeholder="นามสกุล-มารดา" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <!-- <mat-form-field>
+          <input [(ngModel)]="student.morther_career" matInput placeholder="อาชีพ-มารดา" />
+        </mat-form-field> -->
+        <mat-form-field>
+          <mat-select [(ngModel)]="student.morther_career" required placeholder="อาชีพ-มารดา">
+            <mat-option *ngFor="let year of career" [value]="year.value">
+              {{ year.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>กรุณาระบุอาชีพมารดา</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <!-- <mat-form-field>
+          <input [(ngModel)]="student.mother_income" matInput placeholder="รายได้ต่อปีโดยประมาณ-มารดา" />
+        </mat-form-field> -->
+        <mat-form-field>
+          <mat-select [(ngModel)]="student.mother_income" required placeholder="รายได้-มารดา">
+            <mat-option *ngFor="let year of income" [value]="year.value">
+              {{ year.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>กรุณาระบุรายได้มารดา</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.mother_age" matInput placeholder="อายุ-มารดา" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.mother_phone" matInput placeholder="หมายเลขโทรศัพท์-มารดา" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="sub-topic-application">
+        2.3 ข้อมูลผู้ปกครอง
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <mat-form-field>
+          <input [(ngModel)]="student.parent_prename" matInput placeholder="คำหน้านาม-ผู้ปกครอง" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input [(ngModel)]="student.parent_firstname" matInput placeholder="ชื่อ-ผู้ปกครอง" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.parent_lastname" matInput placeholder="นามสกุล-ผู้ปกครอง" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <!-- <mat-form-field>
+          <input [(ngModel)]="student.parent_career" matInput placeholder="อาชีพ-ผู้ปกครอง" />
+        </mat-form-field> -->
+        <mat-form-field>
+          <mat-select [(ngModel)]="student.parent_career" required placeholder="อาชีพ-ผู้ปกครอง">
+            <mat-option *ngFor="let year of career" [value]="year.value">
+              {{ year.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>กรุณาระบุรายได้ผู้ปกครอง</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <!-- <mat-form-field>
+          <input [(ngModel)]="student.parent_income" matInput placeholder="รายได้ต่อปีโดยประมาณ-ผู้ปกครอง" />
+        </mat-form-field> -->
+        <mat-form-field>
+          <mat-select [(ngModel)]="student.parent_income" required placeholder="รายได้-ผู้ปกครอง">
+            <mat-option *ngFor="let year of income" [value]="year.value">
+              {{ year.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>กรุณาระบุรายได้ผู้ปกครอง</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.parent_age" matInput placeholder="อายุ-ผู้ปกครอง" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.parent_phone" matInput placeholder="หมายเลขโทรศัพท์-ผู้ปกครอง" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input [(ngModel)]="student.parent_relationship" [ngModelOptions]="{standalone: true}" matInput placeholder="เกี่ยวข้องกับนักเรียนเป็น"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card>
+  <br />
+  <mat-card>
+    <div class="row">
+      <div class="topic-application">
+        ส่วนที่ 3 สถานภาพทางการศึกษา
+      </div>
+    </div>
+    <div class="sub-topic-application">
+      3.1 สถานภาพ
+    </div>
+    <form [formGroup]="studentForm">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-select formControlName="education_status" [(ngModel)]="student.education_status" placeholder="กรุณาเลือกแผนการเรียน">
+              <mat-option *ngFor="let study of studyStatusM1" [value]="study.value">
+                {{ study.viewValue }}
+              </mat-option>
+              <mat-option *ngFor="let study of studyStatusM4" [value]="study.value">
+                {{ study.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-error>กรุณาเลือกสถานะการศึกษาของนักเรียนในปัจจุบัน</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <div class="sub-topic-application">
+      3.2 ที่อยู่โรงเรียน
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-select placeholder="กรุณาเลือกจังหวัด" [(ngModel)]="student.school_b">
+            <mat-option *ngFor="let prv of prvs" [value]="prv.value" (click)="setApms(prv.prvCode)">
+              {{ prv.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>กรุณาเลือกจังกวัดของโรงเรียน</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-select placeholder="กรุณาเลือกอำเภอ" [(ngModel)]="student.school_a">
+            <mat-option *ngFor="let apm of listApms" [value]="apm.value">
+              {{ apm.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>กรุณาเลือกอำเภอของโรงเรียน</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <mat-form-field>
+          <input type="text" matInput [(ngModel)]="student.school_name" aria-label="Number" [formControl]="myControl" [matAutocomplete]="auto"
+            placeholder="ชื่อโรงเรียน-พิมพ์แต่ชื่อโรงเรียน" />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+
+  </mat-card>
+  <br />
+  <mat-card>
+    <div class="row">
+      <div class="topic-application">
+        ข้อแนะนำการเตรียมเอกสารการสมัคร
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        เมื่อนักเรียนอัพโหลดรูปภาพ และกรอกข้อมูลครบถ้วนถูกต้องแล้วให้ดำเนินการดังต่อไปนี้
+        <ol>
+          <li>พิมพ์ใบสมัครจากระบบแล้วตรวจสอบข้อมูลอีกครั้งว่าข้อมูลเหล่านั้นมีความถูกต้องแล้วจึงลงลายมือชื่อที่ใบสมัคร</li>
+          <li>พิมพ์ใบแจ้งชำระเงินแล้วนำไปชำระที่สาขาธนาคารกรุงศรีอยุธยา จำกัด (มหาชน) หรือเค้าน์เตอร์เซอร์วิส ทุกสาขา แล้วสำเนาหลักฐานพร้อมรับรองสำเนา</li>
+          <li>เตรียมหลักฐานการสำเร็จการศึกษาหรือใบรับรองที่แสดงว่าปัจจุบันกำลังศึกษาอยู่ระดับชั้นใด โดยจะใช้ฉบับจริงหรือสำเนาก็ได้
+            หากใช้แบบสำเนาให้รับรองสำเนาด้วย
+          </li>
+          <li>เอกสารอื่นๆ เพิ่มเติมอาทิ สำเนาใบเปลี่ยนชื่อ หรือนามสกุล เป็นต้น</li>
+          <li>
+            รวบรวมเอกสารดังกล่าวตามข้อ 1 - 4 แล้วจัดส่งทางไปรษณีย์ หรือส่งด้วยต้นเองที่ <br />โรงเรียนมัธยมสาธิตมหาวิทยาลัยนเรศวร
+            (โครงการรับสมัครนักเรียน-61) <br />เลขที่ 1 ถนนสนามบิน ตำบลในเมือง อำเภอเมือง จังหวัดพิษณุโลก รหัสไปรษณีย์ 65000
+          </li>
+        </ol>
+        <b>*หมายเหตุ</b> การรับรองสำเนาหมายถึงการลงลายมือชื่อที่เอกสาร และระบุข้อความรับรองว่าสำเนาถูกต้อง
+        <button mat-raised-button (click)="saveData()" style="font-family: myFont; padding-top: 0.2rem; padding-bottom: 0.2rem; width: 100%; font-size: 1.25rem;"
+          id="btn-submit" color="primary">ฉันยืนยันว่าข้อมูลเหล่านี้ถูกต้องแล้ว บันทึกข้อมูล</button>
+      </div>
+    </div>
+  </mat-card>
+</div>
+<br />

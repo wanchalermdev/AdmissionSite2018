@@ -1,0 +1,76 @@
+<div class="container">
+  <br />
+  <mat-card>
+    <div class="starter-template">
+      <img src="./assets/images/NU_Logo.png" id="logo-nu" />
+      <h2>
+        <b>ประกาศมหาวิทยาลัยนเรศวร</b>
+      </h2>
+      <h4>
+        <b>เรื่อง การรับสมัครนักเรียนเข้าศึกษาต่อระดับชั้นมัธยมศึกษาปีที่ 1 และ 4 <br />โรงเรียนมัธยมสาธิตมหาวิทยาลัยนเรศวร ประจำปีการศึกษา 2561</b>
+      </h4>
+    </div>
+    <hr class="head-hr" />
+    <div class="row">
+      <div class="col-md-12" style="text-align: center;">
+        <h3 style="color: green;" *ngIf="isOnline.canActivate()">คุณกำลังออนไลน์ กรุณาเปิดหน้ากระดานสารสนเทศเพื่อดำเนินการต่อ</h3>
+        <button *ngIf="isOnline.canActivate()" mat-raised-button style="font-family: myFont; margin-bottom: 1.2rem; font-size: 2.4rem; padding-top: 0.8rem; padding-bottom: 0.8rem;"
+        color="primary" (click)="navigateDashboard()">เปิดหน้ากระดานสารสนเทศ (Dashboard)</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-card>
+            <a class="link-file" target="_bank" href="http://www.satit.nu.ac.th/2016/files/upload/1511936061.pdf">- ไฟล์ประกาศมหาวิทยาลัยนเรศวร เรื่องรับสมัครสอบคัดเลือกฯ 61</a>
+        </mat-card>
+      </div>
+      <div class="col-md-6">
+        <mat-card>
+            <a class="link-file" target="_bank" href="http://www.satit.nu.ac.th/2016/files/upload/1511245226.pdf">- คู่มือการใช้ระบบรับสมัครนักเรียน</a>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card>
+  <div class="row">
+    <div class="col-lg-6">
+      <mat-card>
+        <!-- <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140"> -->
+        <h4><b>แผนการเรียนมัธยมศึกษาปีที่ 1</b></h4>
+        <p>โรงเรียนมัธยมสาธิตมหาวิทยาลัยนเรศวรเปิดรับสมัครนักเรียนในระดับชั้นมัธยมศึกษาปีที่ 1 ประจำปีการศึกษา 2561 มี 2 แผนการเรียน ได้แก่</p>
+        <ol>
+          <li>แผนการเรียนวิทยาศาสตร์-คณิตศาสตร์ (ภาษาไทย)</li>
+          <li>แผนการเรียนวิทยาศาสตร์-คณิตศาสตร์ (ภาษาอังกฤษ)</li>
+        </ol>
+        <p>
+          ผู้สมัครสามารถเลือกแผนการเรียนอย่างใดอย่างหนึ่ง หรือเลือกทั้ง 2 แผนการเรียน โปรดดูรายละเอียดอื่นๆที่ไฟล์ประกาศ
+        </p>
+        <p>
+          <button *ngIf="!isOnline.canActivate()" mat-raised-button style="font-family: myFont; font-size: 1.4rem; padding-top: 0.2rem; padding-bottom: 0.2rem;"
+            color="primary" (click)="openDialog(1)">สมัคร ม.1 คลิกที่นี่</button>
+        </p>
+      </mat-card>
+    </div>
+    <div class="col-lg-6">
+      <mat-card>
+        <!-- <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140"> -->
+        <h4><b>แผนการเรียนมัธยมศึกษาปีที่ 4</b></h4>
+        <p>
+          โรงเรียนมัธยมสาธิตมหาวิทยาลัยนเรศวรเปิดรับสมัครนักเรียนในระดับชั้นมัธยมศึกษาปีที่ 4 ประจำปีการศึกษา 2561 มี 2 แผนการเรียน
+          ได้แก่
+        </p>
+        <ol>
+          <li>แผนการเรียนวิทยาศาสตร์-คณิตศาสตร์</li>
+          <li>แผนการเรียนภาษาอังกฤษ-คณิตศาสตร์</li>
+        </ol>
+        <p>
+          ผู้สมัครสามารถเลือกแผนการเรียนอย่างใดอย่างหนึ่ง โปรดดูรายละเอียดอื่นๆที่ไฟล์ประกาศ
+          <br /><br />
+        </p>
+        <p>
+          <button *ngIf="!isOnline.canActivate()" mat-raised-button style="font-family: myFont; font-size: 1.4rem; padding-top: 0.2rem; padding-bottom: 0.2rem;"
+            color="primary" (click)="openDialog(4)">สมัคร ม.4 คลิกที่นี่</button>
+        </p>
+      </mat-card>
+    </div>
+  </div>
+</div>

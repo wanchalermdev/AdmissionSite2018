@@ -1,0 +1,31 @@
+.head-dashboard{
+    text-align: center;
+}
+.column-dashboard{
+    text-align: center;
+}
+.button-dashboard{
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+#admission-calendar{
+    width: 100%;
+}
+
+mat-card{
+    font-family: myFont;
+}
+
+.body-status{
+    font-size: 1.6rem;
+}
+
+.message-status{
+    font-size: 1.85rem;
+    color: dodgerblue;
+    font-style: italic;
+    padding-right: 100px;
+    border-bottom: solid 1px #000;
+    padding-left: 20px;
+}

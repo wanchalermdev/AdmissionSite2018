@@ -1,0 +1,28 @@
+
+@media (min-width: 620px) {
+  #ui-menubar{
+    position: absolute;
+    right: 30px;
+    top: 8px;
+  }
+}
+#second-nav{
+  height: 68px;
+  vertical-align: middle;
+}
+
+#signin-link-button{
+  padding-top: 8px;
+  color: white;
+  height:100%;
+  vertical-align: middle;
+}
+
+mat-icon{
+  /* padding-top: 8px; */
+  vertical-align: middle;
+}
+
+a .dropdown-item-student-menu{
+  color: black;
+}

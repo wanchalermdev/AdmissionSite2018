@@ -1,0 +1,110 @@
+<style>
+    mat-form-field,
+    #btn-submit,
+    #btn-cancel {
+        width: 100%;
+    }
+
+    #btn-submit {
+        margin-bottom: 0.5rem;
+    }
+
+    #btn-cancel {
+        margin-bottom: 0.5rem;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div mat-dialog-content>
+            <div class="row">
+                <div class="col-md-12">
+                    <p><b>ข้อมูลขั้นต้นของผู้สมัครสอบคัดเลือกระดับชั้นมัธยมศึกษาปีที่ {{ data.level }}</b></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field class="example-full-width">
+                        <input matInput required placeholder="เลขบัตรประจำตัวประชาชน" [(ngModel)]="data.personal_id">
+                        <mat-error>กรุณากรอกเลขประจำตัวประชาชน</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-8">
+                    <mat-form-field>
+                        <mat-select id="myPlan" [(ngModel)]="data.plan_code" required placeholder="กรุณาเลือกแผนการเรียน">
+                            <mat-option *ngFor="let course of data.plan" style="font-family: myFont; font-size: 1.2rem;" [value]="course.value">
+                                {{ course.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>กรุณาเลือกแผน</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <mat-select [(ngModel)]="data.prename" placeholder="คำหน้านาม">
+                            <mat-option *ngFor="let preNmae of preNmaes" style="font-family: myFont; font-size: 1.2rem;" [value]="preNmae.value">
+                                {{ preNmae.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="data.firstname" matInput placeholder="ชื่อ" value="">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="data.lastname" matInput placeholder="นามสกุล" value="">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <mat-select [(ngModel)]="data.birthday" placeholder="วันที่เกิด">
+                            <mat-option *ngFor="let date of numOfDate" style="font-family: myFont; font-size: 1.2rem;" [value]="date.value">
+                                {{ date.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <mat-select [(ngModel)]="data.birhtmonth" placeholder="เดือนที่เกิด">
+                            <mat-option *ngFor="let mount of numOfMounts" style="font-family: myFont; font-size: 1.2rem;" [value]="mount.value">
+                                {{ mount.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <mat-select [(ngModel)]="data.birthyear" placeholder="ปีที่เกิด">
+                            <mat-option *ngFor="let year of numOfYears" style="font-family: myFont; font-size: 1.2rem;" [value]="year.value">
+                                {{ year.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    *ผู้สมัครต้องตรวจสอบเลขประจำตัวประชาชนให้แน่ใจว่าถูกต้องเนื่องจากการแก้ไข ต้องติดต่อเจ้าหน้าที่ของโรงเรียนดำเนินการแก้ไขให้<br
+                    /> **ชื่อผู้ใช้ของคุณคือเลขประจำตัวประชาชน สำหรับการลงชื่อเข้าใช้ระบบเพื่อเข้าไปดำเนินการเกี่ยวกับการรับสมัคร<br
+                    /> ***รหัสผ่านของคุณคือวันเดือนปีเกิด (ววดดปปปป) 8 ตัวอักษร
+                </p>
+            </div>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-raised-button></button>
+            <button mat-raised-button style="font-family: myFont; padding-top: 0.2rem; padding-bottom: 0.2rem;" id="btn-submit" [mat-dialog-close]="data"
+                color="primary">ฉันยืนยันว่าข้อมูลเหล่านี้ถูกต้องแล้ว และขอดำเนินการสมัครต่อไป</button>
+            <button mat-raised-button style="font-family: myFont; padding-top: 0.2rem; padding-bottom: 0.2rem;" id="btn-cancel" (click)="onNoClick()"
+                tabindex="-1">ยกเลิก</button>
+        </div>
+    </div>
+</div>

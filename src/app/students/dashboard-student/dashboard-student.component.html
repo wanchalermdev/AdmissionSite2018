@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 head-dashboard">
+      <h2>
+        <b>
+        กระดานสารสนเทศ
+        </b>
+      </h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 column-dashboard">
+      <img src="./assets/images/Wordpad-icon.png" />
+      <br />
+      <button *ngIf="!received" mat-raised-button (click)="gotoInfo()" class="button-dashboard">1. แบบฟอร์มใบสมัคร</button>
+      <button *ngIf="received" mat-raised-button (click)="gotoRecived()" class="button-dashboard">1. แบบฟอร์มใบสมัคร</button>
+      <p>
+        อัพโหลดรูปภาพและกรอกข้อมูลของผู้สมัครให้ครบถ้วนและกดปุ่มบันทึกสีส้มด้านล่างสุดของแบบฟอร์ม
+      </p>
+    </div>
+    <div class="col-md-3 column-dashboard">
+      <img src="./assets/images/Actions-document-print-icon.png" />
+      <br />
+      <button mat-raised-button (click)="printApplication()" class="button-dashboard">2. พิมพ์ใบสมัคร</button>
+      <!-- <img src="http://www.barcode-generator.org/phpqrcode/getCode.php?cht=qr&chl=http://www.satit.nu.ac.th/2016/barcode/application.php?token={{ token }}&chs=180x180&choe=UTF-8&chld=L|0"/> -->
+      <p>
+        หากการพิมพ์เอกสารขัดข้อง ติดต่อเจ้าหน้าที่โทร 055-378-306 ในวันและเวลาราชการ
+      </p>
+    </div>
+    <div class="col-md-3 column-dashboard">
+      <img src="./assets/images/Actions-document-print-icon.png" />
+      <button mat-raised-button (click)="printBillPayMent()" class="button-dashboard">3. พิมพ์ใบแจ้งชำระเงิน</button>
+      <p>
+        หากการพิมพ์เอกสารขัดข้อง ติดต่อเจ้าหน้าที่โทร 055-378-306 ในวันและเวลาราชการ
+      </p>
+    </div>
+    <div class="col-md-3 column-dashboard">
+      <img src="./assets/images/profile-search-icon.png" />
+      <button mat-raised-button (click)="printCard()" class="button-dashboard">4. พิมพ์บัตรประจำตัวผู้เข้าสอบ</button>
+      <p>
+        ระบบจะเปิดให้พิมพ์บัตรประจำตัวผู้เข้าสอบได้ตั้งแต่วันที่ 11 มกราคม 2561 เป็นต้นไป
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <mat-card>
+        <h2><b>สถานะการสมัคร</b></h2>
+        <div>
+          <p class="body-status">
+            ชื่อ - สกุล: <br /><label class="message-status">{{ status.prename_th + status.firstname_th + "  " + status.lastname_th }}</label>
+          </p>
+          <p class="body-status">
+            ระดับชั้น: <br /><label class="message-status">{{ status.level }}</label>
+          </p>
+          <p class="body-status">
+            แผนการเรียน: <br /><label class="message-status">{{ status.plan }}</label>
+          </p>
+        </div>
+        <div>
+          <p class="body-status">
+            ผลการตรวจสอบเอกสาร: <br /><label class="message-status">{{ status.checking }}</label>
+          </p>
+        </div>
+
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <img src="http://www.satit.nu.ac.th/2016/files/upload/1512536135.jpg" id="admission-calendar" />
+    </div>
+  </div>
+</div>

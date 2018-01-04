@@ -1,0 +1,58 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  <a class="navbar-brand" href="#"><b>ระบบรับสมัครนักเรียนเข้าศึกษาต่อปีการศึกษา 2561</b></a>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto" id="ui-menubar">
+      <!-- <li *ngIf="isOnline.canActivate()" class="nav-item active">
+        <a class="nav-link" href="#">
+          <mat-icon>account_circle</mat-icon>
+          <b>{{ fullName }} กำลังออนไลน์</b>
+        </a>
+      </li> -->
+      <li *ngIf="isOnline.canActivate()" class="nav-item active">
+        <a class="nav-link" routerLink="/student/dashboard" href="#">
+          <mat-icon>description</mat-icon>
+          <b>กระดานสารสนเทศ</b>
+        </a>
+      </li>
+      <li *ngIf="!isOnline.canActivate()" class="nav-item active">
+        <a class="nav-link" routerLink="/signin" href="#">
+              <span>
+                  <mat-icon>lock</mat-icon>
+                  <b>ลงชื่อเข้าใช้</b>
+              </span>
+              <span *ngIf="isOnline.canActivate()">
+                <mat-icon>lock</mat-icon>
+                <b>ออกจากระบบ</b>
+            </span>
+            </a>
+      </li>
+      <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Dropdown</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li> -->
+      <li *ngIf="isOnline.canActivate()" data-toggle="dropdown" id="menu-student" class="nav-item active dropdown">
+        <a  *ngIf="isOnline.canActivate()" class="nav-link dropdown-toggle" id="menu-student" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false"><mat-icon>account_circle</mat-icon> {{ fullName }}</a>
+        <div class="dropdown-menu" aria-labelledby="menu-student">
+          <a class="dropdown-item-student-menu dropdown-item active" (click)="logout()" href="#">
+              <mat-icon>lock</mat-icon>
+              <b>ออกจากระบบ</b>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div id="second-nav">
+  fgds
+</div>
